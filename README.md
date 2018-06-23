@@ -35,11 +35,16 @@ Building should also take place in a subdirectory named `build`.
 	make -j4
     sudo make install
 
+# creating a p4 program:
+Coding a p4 program, should be done according to the languange specifications, as published in the [official website](https://p4.org/).
+One can write Match-action tables to each one of the 4 programable piplines, according to sai_model.p4, and the defined target architecture.
+
+One example, is given in [p4src](p4src)
 
 # compile P4 program:  
 p4c-sai PATH_TO_P4 -o OUTPUT_JSON 
 (all output will go in the same dir as json)
-for example, compiling example.p4:  
+e.g., compiling example.p4:  
 ```
 mkdir -p sai_p4_compiler/output/example
 p4c-sai sai_p4_compiler/p4src/example/example.p4 -o sai_p4_compiler/output/example/example.json
