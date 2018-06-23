@@ -1,0 +1,1107 @@
+{
+  "program" : "p4src/example/example.p4",
+  "__meta__" : {
+    "version" : [2, 7],
+    "compiler" : "https://github.com/p4lang/p4c"
+  },
+  "header_types" : [
+    {
+      "name" : "scalars_0",
+      "id" : 0,
+      "fields" : [
+        ["user_metadata_t.vnet_bitmap", 12, false, false],
+        ["in_port_metadata_t.ingress_port", 64, false, false],
+        ["out_port_metadata_t.egress_port", 64, false, false],
+        ["in_rif_metadata_t.ingress_rif", 64, false, false],
+        ["out_rif_metadata_t.egress_rif", 64, false, false],
+        ["_padding_1", 4, false, false]
+      ]
+    },
+    {
+      "name" : "Ethernet_h",
+      "id" : 1,
+      "fields" : [
+        ["dst_addr", 48, false, false],
+        ["src_addr", 48, false, false],
+        ["ether_type", 16, false, false]
+      ]
+    },
+    {
+      "name" : "Vlan_h",
+      "id" : 2,
+      "fields" : [
+        ["pcp", 3, false, false],
+        ["dei", 1, false, false],
+        ["vlan_id", 12, false, false],
+        ["ether_type", 16, false, false]
+      ]
+    },
+    {
+      "name" : "IPv4_h",
+      "id" : 3,
+      "fields" : [
+        ["version", 4, false, false],
+        ["ihl", 4, false, false],
+        ["diffserv", 6, false, false],
+        ["ecn", 2, false, false],
+        ["total_len", 16, false, false],
+        ["identification", 16, false, false],
+        ["flags", 3, false, false],
+        ["frag_offset", 13, false, false],
+        ["ttl", 8, false, false],
+        ["protocol", 8, false, false],
+        ["hdr_checksum", 16, false, false],
+        ["src_addr", 32, false, false],
+        ["dst_addr", 32, false, false]
+      ]
+    },
+    {
+      "name" : "IPv6_h",
+      "id" : 4,
+      "fields" : [
+        ["version", 4, false, false],
+        ["traffic_class", 8, false, false],
+        ["flow_label", 20, false, false],
+        ["payload_len", 16, false, false],
+        ["next_hdr", 8, false, false],
+        ["hop_limit", 8, false, false],
+        ["src_addr", 128, false, false],
+        ["dst_addr", 128, false, false]
+      ]
+    },
+    {
+      "name" : "Mpls_h",
+      "id" : 5,
+      "fields" : [
+        ["label", 20, false, false],
+        ["tc", 3, false, false],
+        ["bos", 1, false, false],
+        ["ttl", 8, false, false]
+      ]
+    },
+    {
+      "name" : "Fcoe_h",
+      "id" : 6,
+      "fields" : []
+    },
+    {
+      "name" : "Arp_h",
+      "id" : 7,
+      "fields" : [
+        ["hw_type", 16, false, false],
+        ["proto_type", 16, false, false],
+        ["hw_addr_len", 8, false, false],
+        ["proto_addr_len", 8, false, false],
+        ["opcode", 16, false, false]
+      ]
+    },
+    {
+      "name" : "Ptp_h",
+      "id" : 8,
+      "fields" : [
+        ["msg_type", 4, false, false],
+        ["seq_id", 16, false, false],
+        ["domain_num", 8, false, false],
+        ["ver", 4, false, false]
+      ]
+    },
+    {
+      "name" : "Control_h",
+      "id" : 9,
+      "fields" : [
+        ["opcode", 16, false, false],
+        ["pause_time", 16, false, false],
+        ["class_enable", 16, false, false],
+        ["pfc_pause_time", 128, false, false]
+      ]
+    },
+    {
+      "name" : "Raw_h",
+      "id" : 10,
+      "fields" : [
+        ["eth_payload", 192, false, false],
+        ["payload_valid", 6, false, false],
+        ["_padding", 2, false, false]
+      ]
+    },
+    {
+      "name" : "Ah_h",
+      "id" : 11,
+      "fields" : [
+        ["nextProtocol", 8, false, false],
+        ["spi", 32, false, false]
+      ]
+    },
+    {
+      "name" : "Esp_h",
+      "id" : 12,
+      "fields" : [
+        ["spi", 32, false, false]
+      ]
+    },
+    {
+      "name" : "Icmp_v4_h",
+      "id" : 13,
+      "fields" : [
+        ["type", 8, false, false],
+        ["code", 8, false, false]
+      ]
+    },
+    {
+      "name" : "Icmp_v6_h",
+      "id" : 14,
+      "fields" : [
+        ["type", 8, false, false],
+        ["code", 8, false, false]
+      ]
+    },
+    {
+      "name" : "Bth_h",
+      "id" : 15,
+      "fields" : [
+        ["opcode", 8, false, false],
+        ["solicited_event", 1, false, false],
+        ["mitigation_state", 1, false, false],
+        ["pad_cnt", 2, false, false],
+        ["transport_hdr_ver", 4, false, false],
+        ["parition_key", 16, false, false],
+        ["fecn", 1, false, false],
+        ["becn", 1, false, false],
+        ["reserved1", 6, false, false],
+        ["dest_queue_pair", 24, false, false],
+        ["ack_req", 1, false, false],
+        ["reserved2", 7, false, false],
+        ["pkt_seq_num", 24, false, false],
+        ["zero_padding", 16, false, false],
+        ["icrc", 4, false, false],
+        ["_padding_0", 4, false, false]
+      ]
+    },
+    {
+      "name" : "Gre_h",
+      "id" : 16,
+      "fields" : [
+        ["C", 1, false, false],
+        ["R", 1, false, false],
+        ["K", 1, false, false],
+        ["S", 1, false, false],
+        ["s", 1, false, false],
+        ["recur", 3, false, false],
+        ["flags", 5, false, false],
+        ["ver", 3, false, false]
+      ]
+    },
+    {
+      "name" : "Tcp_h",
+      "id" : 17,
+      "fields" : [
+        ["src_port", 16, false, false],
+        ["dst_port", 16, false, false],
+        ["seq_no", 32, false, false],
+        ["ack_no", 32, false, false],
+        ["data_offset", 4, false, false],
+        ["res", 4, false, false],
+        ["flags", 8, false, false],
+        ["window", 16, false, false],
+        ["checksum", 16, false, false],
+        ["urgent_ptr", 16, false, false]
+      ]
+    },
+    {
+      "name" : "Udp_h",
+      "id" : 18,
+      "fields" : [
+        ["src_port", 16, false, false],
+        ["dst_port", 16, false, false],
+        ["length", 16, false, false],
+        ["checksum", 16, false, false]
+      ]
+    },
+    {
+      "name" : "Vxlan_h",
+      "id" : 19,
+      "fields" : [
+        ["reserved1", 4, false, false],
+        ["isValid", 1, false, false],
+        ["reserved2", 3, false, false],
+        ["reserved3", 24, false, false],
+        ["vni", 24, false, false],
+        ["reserved4", 8, false, false]
+      ]
+    },
+    {
+      "name" : "Vxlan_gpe_h",
+      "id" : 20,
+      "fields" : [
+        ["reserved1", 4, false, false],
+        ["isValid", 1, false, false],
+        ["reserved2", 3, false, false],
+        ["reserved3", 16, false, false],
+        ["next_proto", 8, false, false],
+        ["vni", 24, false, false],
+        ["reserved4", 8, false, false]
+      ]
+    }
+  ],
+  "headers" : [
+    {
+      "name" : "scalars",
+      "id" : 0,
+      "header_type" : "scalars_0",
+      "metadata" : true,
+      "pi_omit" : true
+    },
+    {
+      "name" : "standard_metadata",
+      "id" : 1,
+      "header_type" : "standard_metadata",
+      "metadata" : true,
+      "pi_omit" : true
+    },
+    {
+      "name" : "ethernet",
+      "id" : 2,
+      "header_type" : "Ethernet_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "vlan",
+      "id" : 3,
+      "header_type" : "Vlan_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "ip.v4",
+      "id" : 4,
+      "header_type" : "IPv4_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "ip.v6",
+      "id" : 5,
+      "header_type" : "IPv6_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "mpls",
+      "id" : 6,
+      "header_type" : "Mpls_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "fcoe",
+      "id" : 7,
+      "header_type" : "Fcoe_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "arp",
+      "id" : 8,
+      "header_type" : "Arp_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "ptp",
+      "id" : 9,
+      "header_type" : "Ptp_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "ctl",
+      "id" : 10,
+      "header_type" : "Control_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "raw",
+      "id" : 11,
+      "header_type" : "Raw_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "ah",
+      "id" : 12,
+      "header_type" : "Ah_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "esp",
+      "id" : 13,
+      "header_type" : "Esp_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "icmp4",
+      "id" : 14,
+      "header_type" : "Icmp_v4_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "icmp6",
+      "id" : 15,
+      "header_type" : "Icmp_v6_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "bth",
+      "id" : 16,
+      "header_type" : "Bth_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "gre",
+      "id" : 17,
+      "header_type" : "Gre_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "tcp",
+      "id" : 18,
+      "header_type" : "Tcp_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "udp",
+      "id" : 19,
+      "header_type" : "Udp_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "ptp_udp",
+      "id" : 20,
+      "header_type" : "Ptp_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "vxlan",
+      "id" : 21,
+      "header_type" : "Vxlan_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    },
+    {
+      "name" : "vxlangpe",
+      "id" : 22,
+      "header_type" : "Vxlan_gpe_h",
+      "metadata" : false,
+      "pi_omit" : true,
+      "sai_predefined" : false
+    }
+  ],
+  "header_stacks" : [],
+  "header_union_types" : [
+    {
+      "name" : "IP_h",
+      "id" : 0,
+      "headers" : [
+        ["v4", "IPv4_h"],
+        ["v6", "IPv6_h"]
+      ]
+    }
+  ],
+  "header_unions" : [
+    {
+      "name" : "ip",
+      "id" : 0,
+      "union_type" : "IP_h",
+      "header_ids" : [4, 5],
+      "pi_omit" : true
+    }
+  ],
+  "header_union_stacks" : [],
+  "field_lists" : [],
+  "errors" : [
+    ["NoError", 1],
+    ["PacketTooShort", 2],
+    ["NoMatch", 3],
+    ["StackOutOfBounds", 4],
+    ["HeaderTooShort", 5],
+    ["ParserTimeout", 6]
+  ],
+  "enums" : [],
+  "parsers" : [
+    {
+      "name" : "parser",
+      "id" : 0,
+      "init_state" : "start",
+      "parse_states" : [
+        {
+          "name" : "start",
+          "id" : 0,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "ethernet"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x8100",
+              "mask" : null,
+              "next_state" : "parse_vlan"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0800",
+              "mask" : null,
+              "next_state" : "parse_ipv4"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x86dd",
+              "mask" : null,
+              "next_state" : "parse_ipv6"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0806",
+              "mask" : null,
+              "next_state" : "parse_arp"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x88f7",
+              "mask" : null,
+              "next_state" : "parse_ptp"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8848",
+              "mask" : null,
+              "next_state" : "parse_mpls"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8906",
+              "mask" : null,
+              "next_state" : "parse_fcoe"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0808",
+              "mask" : null,
+              "next_state" : "parse_control"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : "parse_raw"
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "ether_type"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_vlan",
+          "id" : 1,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "vlan"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x0800",
+              "mask" : null,
+              "next_state" : "parse_ipv4"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x86dd",
+              "mask" : null,
+              "next_state" : "parse_ipv6"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0806",
+              "mask" : null,
+              "next_state" : "parse_arp"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x88f7",
+              "mask" : null,
+              "next_state" : "parse_ptp"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8848",
+              "mask" : null,
+              "next_state" : "parse_mpls"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8906",
+              "mask" : null,
+              "next_state" : "parse_fcoe"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0808",
+              "mask" : null,
+              "next_state" : "parse_control"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["vlan", "ether_type"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_ipv4",
+          "id" : 2,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "ip.v4"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x06",
+              "mask" : null,
+              "next_state" : "parse_tcp"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x11",
+              "mask" : null,
+              "next_state" : "parse_udp"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["ip.v4", "protocol"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_ipv6",
+          "id" : 3,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "ip.v6"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_arp",
+          "id" : 4,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_tcp",
+          "id" : 5,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "tcp"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_udp",
+          "id" : 6,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "udp"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x12b5",
+              "mask" : null,
+              "next_state" : "parse_vxlan"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "dst_port"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_vxlan",
+          "id" : 7,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_ptp",
+          "id" : 8,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_mpls",
+          "id" : 9,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_fcoe",
+          "id" : 10,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_control",
+          "id" : 11,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_raw",
+          "id" : 12,
+          "parser_ops" : [],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        }
+      ]
+    }
+  ],
+  "parse_vsets" : [],
+  "deparsers" : [
+    {
+      "name" : "deparser",
+      "id" : 0,
+      "source_info" : {
+        "filename" : "p4src/example/parser.p4",
+        "line" : 142,
+        "column" : 8,
+        "source_fragment" : "Deparser"
+      },
+      "order" : ["ethernet", "vlan", "ip.v4", "udp", "tcp"]
+    }
+  ],
+  "meter_arrays" : [],
+  "counter_arrays" : [],
+  "register_arrays" : [],
+  "calculations" : [],
+  "learn_lists" : [],
+  "actions" : [
+    {
+      "name" : "NoAction",
+      "id" : 0,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 1,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "control_in_port.set_bridge",
+      "id" : 2,
+      "runtime_data" : [
+        {
+          "name" : "tunnel_id",
+          "bitwidth" : 64
+        },
+        {
+          "name" : "underlay_dip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "bridge_id",
+          "bitwidth" : 64
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "set_bridge_id",
+          "parameters" : [
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "p4src/example/example.p4",
+            "line" : 17,
+            "column" : 8,
+            "source_fragment" : "set_bridge_id(bridge_id)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "control_in_port.to_router",
+      "id" : 3,
+      "runtime_data" : [
+        {
+          "name" : "router_id",
+          "bitwidth" : 64
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "go_to_router",
+          "parameters" : [
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "p4src/example/example.p4",
+            "line" : 21,
+            "column" : 8,
+            "source_fragment" : "go_to_router(router_id)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "control_in_port.to_port",
+      "id" : 4,
+      "runtime_data" : [
+        {
+          "name" : "port_id",
+          "bitwidth" : 64
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "go_to_port",
+          "parameters" : [
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "p4src/example/example.p4",
+            "line" : 25,
+            "column" : 8,
+            "source_fragment" : "go_to_port(port_id)"
+          }
+        }
+      ]
+    }
+  ],
+  "pipelines" : [
+    {
+      "name" : "control_in_port",
+      "id" : 0,
+      "source_info" : {
+        "filename" : "p4src/example/example.p4",
+        "line" : 14,
+        "column" : 8,
+        "source_fragment" : "control_in_port"
+      },
+      "init_table" : "control_in_port.table_ex1",
+      "tables" : [
+        {
+          "name" : "control_in_port.table_ex1",
+          "id" : 0,
+          "source_info" : {
+            "filename" : "p4src/example/example.p4",
+            "line" : 28,
+            "column" : 10,
+            "source_fragment" : "table_ex1"
+          },
+          "sai_flex" : true,
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "in_port_meta.ingress_port",
+              "target" : ["scalars", "in_port_metadata_t.ingress_port"],
+              "sai_extract" : {
+                "header" : "scalars",
+                "header_type" : "scalars_0",
+                "field_offset" : 1,
+                "field_size" : 8,
+                "extract_offset" : 0,
+                "extract_size" : 9,
+                "signed" : false
+              },
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 32,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [2, 0],
+          "actions" : ["control_in_port.set_bridge", "NoAction"],
+          "base_default_next" : "control_in_port.table_ex2",
+          "next_tables" : {
+            "control_in_port.set_bridge" : "control_in_port.table_ex2",
+            "NoAction" : "control_in_port.table_ex2"
+          },
+          "default_entry" : {
+            "action_id" : 0,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "control_in_port.table_ex2",
+          "id" : 1,
+          "source_info" : {
+            "filename" : "p4src/example/example.p4",
+            "line" : 36,
+            "column" : 10,
+            "source_fragment" : "table_ex2"
+          },
+          "sai_flex" : true,
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "headers.ip.v4.dst_addr",
+              "target" : ["ip.v4", "dst_addr"],
+              "sai_extract" : {
+                "header" : "ip.v4",
+                "header_type" : "IPv4_h",
+                "field_offset" : 16,
+                "field_size" : 4,
+                "extract_offset" : 16,
+                "extract_size" : 4,
+                "signed" : false
+              },
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 256,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [3, 4, 1],
+          "actions" : ["control_in_port.to_router", "control_in_port.to_port", "NoAction"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "control_in_port.to_router" : null,
+            "control_in_port.to_port" : null,
+            "NoAction" : null
+          },
+          "default_entry" : {
+            "action_id" : 1,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        }
+      ],
+      "action_profiles" : [],
+      "conditionals" : []
+    },
+    {
+      "name" : "control_out_port",
+      "id" : 1,
+      "source_info" : {
+        "filename" : "p4src/example/example.p4",
+        "line" : 52,
+        "column" : 8,
+        "source_fragment" : "control_out_port"
+      },
+      "init_table" : null,
+      "tables" : [],
+      "action_profiles" : [],
+      "conditionals" : []
+    },
+    {
+      "name" : "control_in_rif",
+      "id" : 2,
+      "source_info" : {
+        "filename" : "p4src/example/example.p4",
+        "line" : 56,
+        "column" : 8,
+        "source_fragment" : "control_in_rif"
+      },
+      "init_table" : null,
+      "tables" : [],
+      "action_profiles" : [],
+      "conditionals" : []
+    },
+    {
+      "name" : "control_out_rif",
+      "id" : 3,
+      "source_info" : {
+        "filename" : "p4src/example/example.p4",
+        "line" : 60,
+        "column" : 8,
+        "source_fragment" : "control_out_rif"
+      },
+      "init_table" : null,
+      "tables" : [],
+      "action_profiles" : [],
+      "conditionals" : []
+    }
+  ],
+  "checksums" : [],
+  "force_arith" : [],
+  "extern_instances" : [],
+  "field_aliases" : []
+}

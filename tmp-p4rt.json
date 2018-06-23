@@ -1,0 +1,122 @@
+{
+ "tables": [
+  {
+   "preamble": {
+    "id": 33616848,
+    "name": "control_in_port.table_ex1",
+    "alias": "table_ex1"
+   },
+   "matchFields": [
+    {
+     "id": 1,
+     "name": "in_port_meta.ingress_port",
+     "bitwidth": 64,
+     "matchType": "EXACT"
+    }
+   ],
+   "actionRefs": [
+    {
+     "id": 16795400
+    },
+    {
+     "id": 16800567,
+     "annotations": [
+      "@defaultonly()"
+     ]
+    }
+   ],
+   "size": "32"
+  },
+  {
+   "preamble": {
+    "id": 33557878,
+    "name": "control_in_port.table_ex2",
+    "alias": "table_ex2"
+   },
+   "matchFields": [
+    {
+     "id": 1,
+     "name": "headers.ip.v4.dst_addr",
+     "bitwidth": 32,
+     "matchType": "EXACT"
+    }
+   ],
+   "actionRefs": [
+    {
+     "id": 16840663
+    },
+    {
+     "id": 16840951
+    },
+    {
+     "id": 16800567,
+     "annotations": [
+      "@defaultonly()"
+     ]
+    }
+   ],
+   "size": "256"
+  }
+ ],
+ "actions": [
+  {
+   "preamble": {
+    "id": 16800567,
+    "name": "NoAction",
+    "alias": "NoAction"
+   }
+  },
+  {
+   "preamble": {
+    "id": 16795400,
+    "name": "control_in_port.set_bridge",
+    "alias": "set_bridge"
+   },
+   "params": [
+    {
+     "id": 1,
+     "name": "tunnel_id",
+     "bitwidth": 64
+    },
+    {
+     "id": 2,
+     "name": "underlay_dip",
+     "bitwidth": 32
+    },
+    {
+     "id": 3,
+     "name": "bridge_id",
+     "bitwidth": 64
+    }
+   ]
+  },
+  {
+   "preamble": {
+    "id": 16840663,
+    "name": "control_in_port.to_router",
+    "alias": "to_router"
+   },
+   "params": [
+    {
+     "id": 1,
+     "name": "router_id",
+     "bitwidth": 64
+    }
+   ]
+  },
+  {
+   "preamble": {
+    "id": 16840951,
+    "name": "control_in_port.to_port",
+    "alias": "to_port"
+   },
+   "params": [
+    {
+     "id": 1,
+     "name": "port_id",
+     "bitwidth": 64
+    }
+   ]
+  }
+ ]
+}
