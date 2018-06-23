@@ -1,9 +1,18 @@
+This is a backend for p4_16 compiler [p4c](https://github.com/p4lang/p4c/).
+This backends compiles p4_16 programs into SAI headers, and should be acommpanied with a vendor provided backend for the SAI adapter implementation. This should allow for easy integration of new programmable pipelines with SAI supporting NOS, like SONiC.
+
+#  SAI target
+This repo defines the SAI target architecture, which consists of a parser, deparser and 4 programable pipelines, in between fixed pipelines, which are defined in accordance with [SAI behvaioral model](https://github.com/opencomputeproject/SAI/tree/master/doc/behavioral%20model):
+![text](SAI_P4_Pipeline.png)
+here black boxes are fixed pipelines, and green ones are programmable.
+
+
+The archtiecture defines the pipelines, and also SAI headers, metadata available at each stage, and the externs (actions which are supported by a SAI target), which can all be seen in [p4include](backend/json_stage/p4include)
 # Install instructions for sai p4_16 backend
   
 Following:  [p4c build instructions](https://github.com/p4lang/p4c/edit/master/README.md).
-## clone p4c repo, with the following branch
-[p4c repo](https://github.com/p4lang/p4c/).
 
+## clone p4c repo, with the following branch
 ```
 git clone https://github.com/p4lang/p4c.git  
 git checkout 6d265b2d15b927db522c08f36a60fe23784e8357
